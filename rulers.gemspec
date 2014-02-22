@@ -21,4 +21,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rack-test"
   gem.add_development_dependency "bundler", "~> 1.5"
   gem.add_development_dependency "rake"
+  gem.add_runtime_dependency "erubis"
 end
