@@ -18,8 +18,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_runtime_dependency "rack"
+  gem.add_runtime_dependency "erubis"
+  gem.add_runtime_dependency "multi_json"
   gem.add_development_dependency "rack-test"
   gem.add_development_dependency "bundler", "~> 1.5"
   gem.add_development_dependency "rake"
-  gem.add_runtime_dependency "erubis"
 end

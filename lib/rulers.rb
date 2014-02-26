@@ -3,6 +3,7 @@ require "rulers/routing"
 require "rulers/util"
 require "rulers/dependencies"
 require "rulers/controller"
+require "rulers/file_model"
 
 module Rulers
   class Application
@@ -22,8 +23,9 @@ module Rulers
         controller = klass.new(env)
         text = controller.send(act)
         [200, {'Content-Type' => 'text/html'}, [text]]
-      rescue Exception
-        [500, {'Content-Type' => 'text/html', 'Location' =>'/quotes/a_quote'}, []]
+      rescue Exception => e
+        error = e.inspect + "\n" + e.backtrace.join("\n")
+        [500, {'Content-Type' => 'text/text', 'Location' =>'/quotes/a_quote'}, [error]]
       end
     end
   end
