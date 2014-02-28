@@ -86,9 +86,9 @@ TEMPLATE
         end
       end
 
-        FileModel.new "db/quotes/#{id}.json"
+        # FileModel.new "db/quotes/#{id}.json"
       end
 
     end
   end
-end
+
