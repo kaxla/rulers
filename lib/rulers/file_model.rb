@@ -48,7 +48,7 @@ module Rulers
         id = highest + 1
 
         File.open("db/quotes/#{id}.json", "w") do |f|
-f.write <<TEMPLATE
+          f.write <<TEMPLATE
   {
     "submitter": "#{hash["submitter"]}",
     "quote": "#{hash["quote"]}",
@@ -56,6 +56,35 @@ f.write <<TEMPLATE
   }
 TEMPLATE
         end
+      end
+
+      def self.update(attrs)
+        return false if self.find(attrs[:id]).nil?
+          if ENV["REQUREST_METHOD"] == "POST"
+            hash = []
+            hash["submitter"] = attrs["submitter"] || ""
+            hash["quote"] = attrs ["quote"] || ""
+            hash ["attribution"] = attrs["attribution"] || ""
+            File.open("db/quotes/#{id}.json", "w") do |f|
+              f.write <<TEMPLATE
+  {
+    "submitter": "#{hash["submitter"]}",
+    "quote": "#{hash["quote"]}",
+    "attribution": "#{hash["attribution"]}"
+  }
+TEMPLATE
+        end
+      end
+    end
+
+      def find_all_by_submitter(submitter_id)
+        files = Dir["db/quotes/*.json"]
+        files.each do |file|
+          if file{ "submitter" == submitter_id }
+            file.map { |f| FileModel.new f }
+          end
+        end
+      end
 
         FileModel.new "db/quotes/#{id}.json"
       end
